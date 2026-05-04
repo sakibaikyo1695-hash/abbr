@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#0a0f1a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="JSSDM ABBR">
+<title>JSSDM Abbreviations</title>
+<link rel="manifest" href="manifest.json">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #070c18;
+    --bg2: #0d1528;
+    --bg3: #111f38;
+    --panel: #0f1c35;
+    --border: #1e3456;
+    --border2: #243d65;
+    --accent: #00c8ff;
+    --accent2: #0099cc;
+    --amber: #ffb800;
+    --green: #00e676;
+    --red: #ff4444;
+    --text: #c8dff5;
+    --text2: #7a9bbf;
+    --text3: #4a6a8f;
+    --mono: 'Share Tech Mono', monospace;
+    --cond: 'Barlow Condensed', sans-serif;
+    --body: 'Barlow', sans-serif;
+    --radius: 4px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* scanline overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--bg2);
+    border-bottom: 2px solid var(--border);
+    padding: 12px 16px 10px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .logo-mark {
+    width: 38px;
+    height: 38px;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--bg);
+    font-weight: bold;
+    line-height: 1.2;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .header-titles h1 {
+    font-family: var(--cond);
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .header-titles p {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--text3);
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    gap: 4px;
+  }
+  .tab {
+    flex: 1;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text2);
+    font-family: var(--cond);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 7px 4px;
+    cursor: pointer;
+    border-radius: var(--radius);
+    transition: all 0.15s;
+  }
+  .tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg);
+  }
+  .tab:not(.active):hover {
+    border-color: var(--accent2);
+    color: var(--accent);
+  }
+
+  /* MAIN CONTENT */
+  .main { padding: 14px 14px 100px; }
+
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* SEARCH */
+  .search-wrap {
+    position: relative;
+    margin-bottom: 12px;
+  }
+  .search-wrap .icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text3);
+    font-size: 14px;
+  }
+  .search-input {
+    width: 100%;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 12px 12px 38px;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .search-input:focus { border-color: var(--accent); }
+  .search-input::placeholder { color: var(--text3); }
+
+  .mode-toggle {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .mode-btn {
+    flex: 1;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text2);
+    font-family: var(--cond);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-transform: uppercase;
+  }
+  .mode-btn.active {
+    background: var(--bg3);
+    border-color: var(--amber);
+    color: var(--amber);
+  }
+
+  .results-count {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+
+  /* RESULT CARDS */
+  .result-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 6px;
+    overflow: hidden;
+    animation: fadeIn 0.15s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+  .result-card-inner {
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .result-abbr {
+    font-family: var(--mono);
+    font-size: 16px;
+    color: var(--accent);
+    font-weight: bold;
+    min-width: 90px;
+    flex-shrink: 0;
+  }
+  .result-divider {
+    width: 1px;
+    height: 28px;
+    background: var(--border2);
+    flex-shrink: 0;
+  }
+  .result-words {
+    flex: 1;
+  }
+  .result-word {
+    font-family: var(--cond);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .result-category {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--text3);
+    letter-spacing: 1px;
+    margin-top: 2px;
+    text-transform: uppercase;
+  }
+  .multi-badge {
+    background: var(--bg3);
+    border: 1px solid var(--amber);
+    color: var(--amber);
+    font-family: var(--mono);
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  /* multi-meaning expanded */
+  .multi-meanings {
+    border-top: 1px solid var(--border);
+    padding: 8px 14px;
+    display: none;
+  }
+  .multi-meanings.show { display: block; }
+  .multi-meaning-item {
+    font-size: 13px;
+    color: var(--text2);
+    padding: 3px 0;
+    border-bottom: 1px solid var(--border);
+    font-family: var(--body);
+  }
+  .multi-meaning-item:last-child { border-bottom: none; }
+
+  /* no results */
+  .no-results {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text3);
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  /* CONVERTER */
+  .converter-mode {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .conv-btn {
+    flex: 1;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text2);
+    font-family: var(--cond);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 9px;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .conv-btn.active {
+    background: linear-gradient(135deg, #0a2a45, #0d3560);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .writing-mode-select {
+    margin-bottom: 12px;
+  }
+  .writing-mode-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .writing-modes {
+    display: flex;
+    gap: 6px;
+  }
+  .wm-btn {
+    flex: 1;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text2);
+    font-family: var(--cond);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-transform: uppercase;
+  }
+  .wm-btn.active {
+    background: var(--bg3);
+    border-color: var(--green);
+    color: var(--green);
+  }
+
+  .textarea-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .clear-btn {
+    background: none;
+    border: none;
+    color: var(--text3);
+    font-family: var(--mono);
+    font-size: 10px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    text-decoration: underline;
+  }
+  .clear-btn:hover { color: var(--red); }
+
+  .conv-textarea {
+    width: 100%;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px;
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 14px;
+    line-height: 1.6;
+    outline: none;
+    resize: vertical;
+    min-height: 130px;
+    transition: border-color 0.2s;
+  }
+  .conv-textarea:focus { border-color: var(--accent2); }
+
+  .convert-btn {
+    width: 100%;
+    margin: 10px 0;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    border: none;
+    border-radius: var(--radius);
+    color: var(--bg);
+    font-family: var(--cond);
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 13px;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.1s;
+  }
+  .convert-btn:hover { opacity: 0.9; }
+  .convert-btn:active { transform: scale(0.98); }
+
+  .output-box {
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    padding: 12px;
+    font-family: var(--body);
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text);
+    min-height: 80px;
+    position: relative;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .output-box .converted-abbr {
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: bold;
+  }
+  .output-box .converted-word {
+    color: var(--green);
+    font-style: italic;
+  }
+
+  .copy-btn {
+    margin-top: 8px;
+    background: none;
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    color: var(--text2);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-transform: uppercase;
+  }
+  .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  .warning-note {
+    background: rgba(255, 184, 0, 0.07);
+    border: 1px solid rgba(255, 184, 0, 0.2);
+    border-radius: var(--radius);
+    padding: 8px 12px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--amber);
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+    margin-top: 8px;
+  }
+
+  /* RULES */
+  .rules-header {
+    font-family: var(--cond);
+    font-weight: 900;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 10px;
+  }
+  .rule-item {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 6px;
+    overflow: hidden;
+  }
+  .rule-header {
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .rule-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    min-width: 22px;
+  }
+  .rule-title {
+    flex: 1;
+    font-family: var(--cond);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--text);
+  }
+  .rule-chevron {
+    color: var(--text3);
+    font-size: 12px;
+    transition: transform 0.2s;
+  }
+  .rule-item.open .rule-chevron { transform: rotate(180deg); }
+  .rule-body {
+    display: none;
+    padding: 0 14px 14px;
+    border-top: 1px solid var(--border);
+  }
+  .rule-item.open .rule-body { display: block; }
+  .rule-body p {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.7;
+    margin-bottom: 8px;
+    font-family: var(--body);
+  }
+  .rule-body p:last-child { margin-bottom: 0; }
+  .rule-example {
+    background: var(--bg3);
+    border-left: 3px solid var(--accent);
+    padding: 8px 12px;
+    margin: 8px 0;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+  }
+  .rule-body ul {
+    list-style: none;
+    margin: 6px 0;
+  }
+  .rule-body ul li {
+    font-size: 13px;
+    color: var(--text2);
+    padding: 4px 0;
+    padding-left: 16px;
+    position: relative;
+    font-family: var(--body);
+    line-height: 1.5;
+  }
+  .rule-body ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 10px;
+    top: 6px;
+  }
+
+  /* status bar */
+  .status-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 6px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 50;
+  }
+  .status-info {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--text3);
+    letter-spacing: 1px;
+  }
+  .status-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+    margin-right: 5px;
+    animation: blink 2s infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div class="logo-mark">JS<br>SDM</div>
+    <div class="header-titles">
+      <h1>JSSDM Abbreviations</h1>
+      <p>JOINT SERVICES STAFF DUTIES MANUAL // CLASSIFICATION: RESTRICTED</p>
+    </div>
+  </div>
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('search')">⌕ Search</button>
+    <button class="tab" onclick="switchTab('converter')">⇄ Convert</button>
+    <button class="tab" onclick="switchTab('rules')">☰ Rules</button>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- SEARCH SECTION -->
+  <div id="section-search" class="section active">
+    <div class="search-wrap">
+      <span class="icon">⌕</span>
+      <input type="text" class="search-input" id="searchInput" placeholder="Type word or abbreviation..." oninput="doSearch()" autocomplete="off" autocorrect="off" spellcheck="false">
+    </div>
+    <div class="mode-toggle">
+      <button class="mode-btn active" id="modeWord" onclick="setMode('word')">Word → Abbr</button>
+      <button class="mode-btn" id="modeAbbr" onclick="setMode('abbr')">Abbr → Word</button>
+      <button class="mode-btn" id="modeBoth" onclick="setMode('both')">Both</button>
+    </div>
+    <div class="results-count" id="resultsCount"></div>
+    <div id="results"></div>
+  </div>
+
+  <!-- CONVERTER SECTION -->
+  <div id="section-converter" class="section">
+    <div class="converter-mode">
+      <button class="conv-btn active" id="convFull2Abbr" onclick="setConvMode('full2abbr')">Full → Abbreviated</button>
+      <button class="conv-btn" id="convAbbr2Full" onclick="setConvMode('abbr2full')">Abbreviated → Full</button>
+    </div>
+
+    <div class="writing-mode-select">
+      <div class="writing-mode-label">Writing Mode</div>
+      <div class="writing-modes">
+        <button class="wm-btn active" id="wmOps" onclick="setWritingMode('operational')">Operational</button>
+        <button class="wm-btn" id="wmSvc" onclick="setWritingMode('service')">Service</button>
+        <button class="wm-btn" id="wmSig" onclick="setWritingMode('signal')">Signal</button>
+      </div>
+    </div>
+
+    <div class="textarea-label">
+      <span>Input Text</span>
+      <button class="clear-btn" onclick="clearConverter()">CLEAR</button>
+    </div>
+    <textarea class="conv-textarea" id="convInput" placeholder="Paste your paragraph here..."></textarea>
+
+    <button class="convert-btn" onclick="doConvert()">▶ CONVERT</button>
+
+    <div class="textarea-label" style="margin-top:10px">
+      <span>Output</span>
+    </div>
+    <div class="output-box" id="convOutput">—</div>
+    <button class="copy-btn" onclick="copyOutput()">⎘ Copy Output</button>
+
+    <div class="warning-note">
+      ⚠ Abbreviations NOT used in: demi-official letters, formal/commanded letters, service papers (non-operational). Signal mode applies maximum abbreviation. Verify output before use.
+    </div>
+  </div>
+
+  <!-- RULES SECTION -->
+  <div id="section-rules" class="section">
+    <div class="rules-header">Abbreviation Rules — Service Writing</div>
+    <div id="rulesList"></div>
+  </div>
+
+</div>
+
+<div class="status-bar">
+  <span class="status-info"><span class="status-dot"></span>OFFLINE CAPABLE // PWA</span>
+  <span class="status-info" id="dbCount">Loading...</span>
+</div>
+
+<script>
+// ===================== DATABASE =====================
+const ABBR_DATA = [
+  // General Abbreviations (A)
+  ["Abbreviate","abbr","general"],["Above Mean Sea Level","AMSL","general"],["Above Water Warfare","AWW","general"],["Absent Without Leave","AWOL","general"],["Abstract of Evidence","A of E","general"],["Accommodation","accn","general"],["Account","acct","general"],["Accounting Unit","AU","general"],["Acknowledge","ack","general"],["Action","act","general"],["Action Information Organization","AIO","general"],["Actual Time of Arrival","ATA","general"],["Additional","addl","general"],["Address","adds","general"],["Address Indicating Group","AIG","general"],["Adjutant","adjt","general"],["Administer/Administration/Administrative","admin","general"],["Administrative Control","ADCON","general"],["Administration and Logistics","A&L","general"],["Administrative Order","AdminO","general"],["Advance","adv","general"],["Advance Trade Training","ATT","general"],["Advantage","advtg","general"],["After Action Review","AAR","general"],["Air Command Operations Centre","ACOC","general"],["Air Control Team","ACT","general"],["Air Defence Artillery","ADA","general"],["Air Defence Control Centre","ADCC","general"],["Air Defence Commander","ADC","general"],["Air Defence Plan","ADP","general"],["Air Defence Exercise","ADEX","general"],["Air Defence Ground Environment","ADGE","general"],["Air Defence Identification Zone","ADIZ","general"],["Air Defence Notification Centre","ADNC","general"],["Air Defence Operations Centre","ADOC","general"],["Air Defence Weapon System","ADWS","general"],
+  ["Air Force Doctrine Document","AFDD","general"],["Air Force Instruction","AFI","general"],["Air Force Letter","AFL","general"],["Air Force Order","AFO","general"],["Air Intelligence Preparation of the Battle Space","AIPB","general"],["Air Liaison Net","ALN","general"],["Air Liaison Officer","ALO","general"],["Air Operations Command Centre","AOCC","general"],["Air Operation Directive","AOD","general"],["Air Operations Plan","AOP","general"],["Air Operations Planning Process","AOPP","general"],["Air Raid Precaution","ARP","general"],["Air Raid Reporting Control Ship","ARRCS","general"],["Air Support Operations Centre","ASOC","general"],["Air Surveillance Radar","ASR","general"],["Airspace Control","ASCON","general"],["Airspace Control Authority","ACA","general"],["Airspace Control Measures","ACM","general"],["Airspace Control Order","ACO","general"],["Airspace Control Plan","ACP","general"],["Air Tasking Order","ATO","general"],["Air to Air Guided Weapon","AAGW","general"],["Air to Air Missile","AAM","general"],["Air to Air Refuelling","AAR","general"],["Air to Surface Guided Weapon","ASGW","general"],["Air to Surface Missile","ASM","general"],["Air Traffic Control","ATC","general"],["Air Traffic Control Centre","ATCC","general"],["Airborne Early Warning","AEW","general"],["Airborne Warning and Control System","AWACS","general"],["Aircraft","ac","general"],["Aircraft Accident Investigation","AAI","general"],["Aircraft Establishment","AE","general"],["Aircraft Maintenance Manual","AMM","general"],["Aircraft on Ground","AOG","general"],["Airfield","airfd","general"],["Airhead","ahd","general"],["All Up Weight","AUW","general"],["Allocate","alloc","general"],["Allotment","alot","general"],["Allowance","allce","general"],["Alter Course","a/c","general"],["Alternate","altn","general"],["Alternative Supply Route","ASR","general"],["Altitude","alt","general"],["Ambulance","amb","general"],["Amendment","amdt","general"],["Ammunition","ammo","general"],["Amphibious","amph","general"],["Amphibious Beach Unit","ABU","general"],["Amphibious Task Force","ATF","general"],["Annex","anx","general"],["Annual Confidential Report","ACR","general"],["Annual Performance Report","APR","general"],["Annual Training Grant","ATG","general"],["Answer","ans","general"],["Anti-Tank","Atk","general"],["Anti-Aircraft","AA","general"],["Anti Aircraft Artillery","AAA","general"],["Anti-Aircraft Defence Commander","AADC","general"],["Anti-Personnel","Apers","general"],["Anti-Tank Guided Missile","ATGM","general"],["Anti-Tank Guided Weapon","ATGW","general"],["Anti-Tank Missile","ATM","general"],["Anti-Air Warfare","AAW","general"],["Anti-Air Warfare Coordinator","AAWC","general"],["Anti-Radiation Missile","ARM","general"],["Anti-Ship Missile","ASM","general"],["Anti-Ship Missile Defence","ASMD","general"],["Anti-Submarine Warfare","ASW","general"],["Anti Surface Force Operations","ASFO","general"],["Anti-Surface-Vessel Warfare","ASVW","general"],["Anti-Surface Warfare","ASuW","general"],["Appendix","appx","general"],["Appoint","appt","general"],["Appreciate","aprc","general"],["Approach","app","general"],["Application","appl","general"],["Approximate","approx","general"],["Area Defence Missile System","ADMS","general"],["Area Finance Controller","AFC","general"],["Area of Interest","AOI","general"],["Area of Operation","AOP","general"],["Area Maritime Headquarters","AMHQ","general"],["Armament","armt","general"],["Armed Forces","AF","general"],["Armed Forces Division","AFD","general"],["Armed Forces Medical Stores Depot","AFMSD","general"],["Armed Forces War Course","AFWC","general"],["Armour","armr","general"],["Armour Piercing Discarding Sabot","APDS","general"],["Armour Piercing Fin Stabilized Discarding Sabot","APFSDS","general"],["Armour Piercing Incendiary","API","general"],["Armoured","armd","general"],["Armoured Command Vehicle","ACV","general"],["Armoured Fighting Vehicle","AFV","general"],["Armoured Personnel Carrier","APC","general"],["Armoured Recovery Vehicle","ARV","general"],["Armoured Vehicle Launched Bridge","AVLB","general"],["Army Air Corps","AAC","general"],["Army Aviation Unit","AAU","general"],["Army Doctrinal Publication","ADP","general"],["Army Dress Regulations","ADR","general"],["Army Headquarters","AHQ","general"],["Army Post Office","APO","general"],["Army Regulations","AR","general"],["Army Security Unit","ASU","general"],["Army Sports Control Board","ASCB","general"],["Army Training and Doctrine Command","ARTDOC","general"],["Army Training Note","ATN","general"],["Army Training Manual","ATM","general"],["Army Training Publication","ATP","general"],["Arrange","arng","general"],["Arrive","arr","general"],["Artillery","arty","general"],["Artillery Course Shooting","ACS","general"],["As Soon as Possible","ASP","general"],["Assault","aslt","general"],["Assault Ship","LPD","general"],["Assembly","assy","general"],["Assembly Area","Assy A","general"],["Assign","asg","general"],["Assist","asst","general"],["Assistant Engineer","AE","general"],["Assistant Garrison Engineer","AGE","general"],["Asymmetric Warfare","AW","general"],["Attach","att","general"],["Attack","attk","general"],["Attend","atnd","general"],["Attention","attn","general"],["Authenticate","authen","general"],["Attack Helicopter","AH","general"],["Automated Air Tasking Order","AATO","general"],["Authorized Proportion","AP","general"],["Authorize","auth","general"],["Automatic Direction Finder","ADF","general"],["Auxiliary","aux","general"],["Auxiliary Power Unit","APU","general"],["Avenue of Approach","AA","general"],["Average","avg","general"],["Aviation","avn","general"],["Aviation Gasoline","AVGAS","general"],["Aviation Oil","AVOIL","general"],["Axis of Advance","A of A","general"],["Azimuth","az","general"],
+  // B
+  ["Back Loading Point","BLP","general"],["Backload","bkld","general"],["Balance","bal","general"],["Bangladesh Air Force","BAF","general"],["Bangladesh Armed Services Board","BASB","general"],["Bangladesh Army","BA","general"],["Bangladesh Army Order","BAO","general"],["Bangladesh Coast Guard","BCG","general"],["Bangladesh Navy","BN","general"],["Bangladesh Navy Ship","BNS","general"],["Bangladesh Navy Tug","BNT","general"],["Bangladesh University of Professionals","BUP","general"],["Barrack","bk","general"],["Base Headquarters","BHQ","general"],["Base Supply Depot","BSD","general"],["Battalion","bn","general"],["Battery","bty","general"],["Battle","btl","general"],["Battle Group","BG","general"],["Beacon","bcn","general"],["Bearing","bg","general"],["Beyond Economic Repair","BER","general"],["Beyond Visual Range","BVR","general"],["Biological Warfare","BW","general"],["Bivouac","biv","general"],["Board of Enquiry","BOE","general"],["Board of Inquiry","BOI","general"],["Boundary","bdry","general"],["Brigade","bde","general"],["Broadcast","bro","general"],["Budget","bgt","general"],["Built Up Area","BUA","general"],
+  // C
+  ["Calculate","cal","general"],["Calibrate","calb","general"],["Camouflage","cam","general"],["Canalize","cnz","general"],["Cantonment","cantt","general"],["Capability","cap","general"],["Capture","capr","general"],["Carry","carr","general"],["Casual Leave","C Lve","general"],["Casualty Evacuation","CASEVAC","general"],["Categorize","cat","general"],["Cavalry","cav","general"],["Central Ammunition Depot","CAD","general"],["Certify","cert","general"],["Chemical Warfare","CW","general"],["Chemical Biological Radiological and Nuclear","CBRN","general"],["Check","chk","general"],["Civil Affairs","CA","general"],["Close Air Support","CAS","general"],["Close in Weapon System","CIWS","general"],["Combat","cbt","general"],["Command","comd","general"],["Commandant","comdt","general"],["Command and Control","C2","general"],["Communication Centre","COMCEN","general"],["Communication Intelligence","COMINT","general"],["Communication Plan","COMPLAN","general"],["Communication Security","COMSEC","general"],["Company","coy","general"],["Computer","com","general"],["Concentrate","conc","general"],["Confirm","cfm","general"],["Continue","cont","general"],["Control","ctrl","general"],["Counter Attack","C attk","general"],["Counter Intelligence","C int","general"],["Course of Action","COA","general"],["Court of Inquiry","C of I","general"],
+  // D
+  ["Date","dt","general"],["Date-Time-Group","DTG","general"],["Dead Reckoning","DR","general"],["Decision Making Process","DMP","general"],["Decontaminate","decon","general"],["Deliver","del","general"],["Demand","dmd","general"],["Demi-official","DO","general"],["Demolish","dml","general"],["Department","dept","general"],["Deploy","depl","depl"],["Deputy","Dy","general"],["Detach","det","general"],["Develop","dev","general"],["Diagram","diag","general"],["Direct","dir","general"],["Director","Dir","general"],["Directorate","dte","general"],["Director General","DG","general"],["Distance","dstn","general"],["Distance Measuring Equipment","DME","general"],["Doctrine","doc","general"],["Document","docu","general"],
+  // E
+  ["Earmark","emk","general"],["Economy","econ","general"],["Education","edn","general"],["Effect","eff","general"],["Electronic Countermeasures","ECM","general"],["Electronic Intelligence","ELINT","general"],["Element","elm","general"],["Embark","emb","general"],["Emergency","emg","general"],["Enemy","en","general"],["Engine","eng","general"],["Engineer","engr","general"],["Equipment","eqpt","general"],["Establish","estb","general"],["Estimate","est","general"],["Evacuate","evac","general"],["Evaluate","eval","general"],["Examine","exam","general"],["Execute","exec","general"],["Exercise","ex","general"],["Explosive Ordnance Disposal","EOD","general"],["Estimated Time of Arrival","ETA","general"],["Estimated Time of Completion","ETC","general"],["Estimated Time of Departure","ETD","general"],
+  // F
+  ["Field","fd","general"],["Fight","ftg","general"],["Figure","fig","general"],["Finance","fin","general"],["Flight","flt","general"],["Follow","fol","general"],["Formation","fmn","general"],["Forward","fwd","general"],["Forward Operating Base","FOB","general"],["Fragment","frag","general"],
+  // G
+  ["Garrison","gar","general"],["General Court Martial","GCM","general"],["General Purpose Machine Gun","GPMG","general"],["Global Positioning System","GPS","general"],["Government","govt","general"],["Ground","grd","general"],["Group","gp","general"],["Guard","gd","general"],["Guided Missile","GM","general"],
+  // H
+  ["Harbour","har","general"],["Headquarters","HQ","general"],["Helicopter","heli","general"],["High Explosive Anti-Tank","HEAT","general"],["History","hist","general"],["Humanitarian Assistance and Disaster Relief","HADR","general"],
+  // I
+  ["Identify","ident","general"],["Illuminate","illum","general"],["Immediate","imm","general"],["Infantry","inf","general"],["Inform","info","general"],["Inspection","insp","general"],["Instruct","instr","general"],["Intelligence Summary","INTSUM","general"],
+  // J
+  ["Joint","jt","general"],["Joint Force","JF","general"],["Joint Operations Centre","JOC","general"],
+  // K
+  ["Killed in Action","KIA","general"],
+  // L
+  ["Landing Zone","LZ","general"],["Latitude","lat","general"],["Leader","ldr","general"],["Leave","lve","general"],["Letter","ltr","general"],["Logistics","log","general"],
+  // M
+  ["Machine Gun","MG","general"],["Maintain","maint","general"],["Major","maj","general"],["Manage","mng","general"],["Maximum","max","general"],["Medical Evacuation","MEDEVAC","general"],["Message","msg","general"],["Military","mil","general"],["Military Police","MP","general"],["Missing in Action","MIA","general"],["Mission","msn","general"],["Mortar","mor","general"],["Move","mov","general"],["Movement Order","MovO","general"],
+  // N
+  ["Navigate","nav","general"],["Navigation","N","general"],["Necessary","nec","general"],["Night","ni","general"],["Nothing to Report","NTR","general"],["Notice to Airmen","NOTAM","general"],["Nuclear Biological and Chemical","NBC","general"],["Number","no","general"],
+  // O
+  ["Observation Post","OP","general"],["Officer","offr","general"],["Operate","op","general"],["Operational Command","OPCOM","general"],["Operational Control","OPCON","general"],["Operation Order","OpO","general"],["Order of Battle","ORBAT","general"],["Ordnance","ord","general"],["Organize","org","general"],
+  // P
+  ["Patrol","ptl","general"],["Pay Pension and Allowance","PP&A","general"],["Period","pd","general"],["Personnel","PS","general"],["Photograph","photo","general"],["Physical Training","PT","general"],["Plan","plg","general"],["Point","pt","general"],["Position","posn","general"],["Priority","pri","general"],["Prisoners of War","POW","general"],["Programme","prog","general"],
+  // Q
+  ["Qualify","qual","general"],["Quantity","qty","general"],["Quarter","qtr","general"],["Quick Reaction Force","QRF","general"],
+  // R
+  ["Radio Detection and Ranging","Radar","general"],["Range","rng","general"],["Ration","rat","general"],["Receive","rcv","general"],["Reconnaissance","recce","general"],["Regiment","regt","general"],["Reinforce","rft","general"],["Replace","repl","general"],["Request","req","general"],["Require","reqr","general"],["Reserve","res","general"],["Retired","retd","general"],["Return to Base","RTB","general"],["Rules of Engagement","ROE","general"],
+  // S
+  ["Salvage","sal","general"],["Satellite Communication","SATCOM","general"],["Search and Rescue","SAR","general"],["Security","sy","general"],["Signal","sig","general"],["Simulate","sim","general"],["Situation","sit","general"],["Situation Report","SITREP","general"],["Small Arms","SA","general"],["Speed","spd","general"],["Squadron","sqn","general"],["Staff Officer","SO","general"],["Standing Operating Procedure","SOP","general"],["Station","sta","general"],["Strategic","strat","general"],["Strength","str","general"],["Subject","subj","general"],["Support","sp","general"],
+  // T
+  ["Tactics","tac","general"],["Tactical Control","TACON","general"],["Tank","tk","general"],["Target","tgt","general"],["Task Force","TF","general"],["Training","trg","general"],["Transport","tpt","general"],
+  // U
+  ["Ultra High Frequency","UHF","general"],["Under Command","UC","general"],["Urgent","urg","general"],
+  // V
+  ["Vehicle","veh","general"],["Very High Frequency","VHF","general"],["Visual Flight Rules","VFR","general"],
+  // W
+  ["Warning Order","WngO","general"],["Weapon","wpn","general"],["Weather","wx","general"],["Weight","wt","general"],["Withdraw","wdr","general"],["Workshop","wksp","general"],["Wounded in Action","WIA","general"],
+  // Y/Z
+  ["Year","yr","general"],["Zone","Z","general"],
+
+  // RANKS - Army Officers
+  ["Field Marshal","FM","rank"],["General","Gen","rank"],["Lieutenant General","Lt Gen","rank"],["Major General","Maj Gen","rank"],["Brigadier General","Brig Gen","rank"],["Colonel","Col","rank"],["Lieutenant Colonel","Lt Col","rank"],["Major","Maj","rank"],["Captain","Capt","rank"],["Lieutenant","Lt","rank"],["Second Lieutenant","2Lt","rank"],
+  // Army OR
+  ["Master Warrant Officer","MWO","rank"],["Senior Warrant Officer","SWO","rank"],["Warrant Officer","WO","rank"],["Sergeant","Sgt","rank"],["Corporal","Cpl","rank"],["Lance Corporal","Lcpl","rank"],
+  // Navy Officers
+  ["Admiral","Adm","rank"],["Vice Admiral","V Adm","rank"],["Rear Admiral","R Adm","rank"],["Commodore","Cdre","rank"],["Commander","Cdr","rank"],["Lieutenant Commander","Lt Cdr","rank"],["Sub Lieutenant","S Lt","rank"],["Midshipman","Mid","rank"],
+  // Navy Sailors
+  ["Chief Petty Officer","CPO","rank"],["Petty Officer","PO","rank"],["Leading Seaman","LS","rank"],["Able Seaman","AB","rank"],["Ordinary Seaman","OD","rank"],
+  // Air Force
+  ["Air Chief Marshal","Air Chf Mshl","rank"],["Air Marshal","Air Mshl","rank"],["Air Vice Marshal","AVM","rank"],["Air Commodore","Air Cdre","rank"],["Group Captain","Gp Capt","rank"],["Wing Commander","Wg Cdr","rank"],["Squadron Leader","Sqn Ldr","rank"],["Flight Lieutenant","Flt Lt","rank"],["Flying Officer","Flg Offr","rank"],["Pilot Officer","Plt Offr","rank"],
+
+  // MEASUREMENTS
+  ["inch","in","measurement"],["foot","ft","measurement"],["yard","yd","measurement"],["mile","mile","measurement"],["nautical mile","nm","measurement"],["millimetre","mm","measurement"],["centimetre","cm","measurement"],["metre","m","measurement"],["kilometre","km","measurement"],["square metre","sq m","measurement"],["cubic metre","cu m","measurement"],["pint","pt","measurement"],["quart","qt","measurement"],["gallon","gal","measurement"],["litre","l","measurement"],["millilitre","ml","measurement"],["second","sec","measurement"],["minute","min","measurement"],["hour","hr","measurement"],["knot","kt","measurement"],["kilometre per hour","km/hr","measurement"],["ounce","oz","measurement"],["pound","lb","measurement"],["kilogram","kg","measurement"],["tonne","t","measurement"],["degree Celsius","°C","measurement"],["degree Fahrenheit","°F","measurement"],["horsepower","hp","measurement"],["kilowatt","kW","measurement"],["ampere","amp","measurement"],["volt","V","measurement"],["hertz","Hz","measurement"],["decibel","dB","measurement"],
+
+  // MULTI-MEANING (stored as word→abbr, abbr will show note)
+  ["Avenue of Approach / Anti-Aircraft","AA","multi"],["Airborne / After Burner","AB","multi"],["Air Defence / Despatch","AD","multi"],["Casual / Casualty","cas","multi"],["Centre of Gravity / Guided Missile Cruiser","CG","multi"],["Course of Action / Committee of Adjustment","COA","multi"],["Daily Maintenance / Disaster Management","DM","multi"],["Drop Zone / Danger Zone","DZ","multi"],["Electronic Warfare / Early Warning","EW","multi"],["Fighter / Fleet","F","multi"],["Fixed Wing / Fresh Water","FW","multi"],["High Explosive / Hydrophone Effect","HE","multi"],["Information Technology / Individual Training","IT","multi"],["Landing / Leading","ldg","multi"],["Medical / Medicine / Medium","med","multi"],["Mechanical / Motor Transport","MT","multi"],["Mine Sweeper / Mile Stone","MS","multi"],["Mission Oriented Training / Task","MOT","multi"],["Paragraph / Parachute / Paratrooper","para","multi"],["Public Address / Personal Assistant","PA","multi"],["Radio Telephone / Religion Teacher","RT","multi"],["Receipt Voucher / Rendezvous","RV","multi"],["Runway / Rotary Wing / Riverine Warfare","RW","multi"],["Security Force / Special Force / Striking Force","SF","multi"],["Start Line / Search Light","SL","multi"],["Time on Target / Transfer of Technology","TOT","multi"],
+];
+
+// Multi-meaning lookup
+const MULTI = {
+  "AA": ["Avenue of Approach","Anti-Aircraft"],
+  "AB": ["Airborne","After Burner"],
+  "AD": ["Air Defence","Despatch"],
+  "ADA": ["Air Defence Area","Action Data Automation","Air Defence Alert"],
+  "AI": ["Air Intelligence","Air Interception","Air Interdiction","Artificial Intelligence"],
+  "cas": ["Casual","Casualty"],
+  "CG": ["Centre of Gravity","Guided Missile Cruiser"],
+  "DG": ["Director General","Degaussing","Danger Goods"],
+  "DM": ["Daily Maintenance","Disaster Management"],
+  "DZ": ["Drop Zone","Danger Zone"],
+  "EW": ["Early Warning","Electronic Warfare"],
+  "F": ["Fighter","Fleet"],
+  "FW": ["Fixed Wing","Fresh Water"],
+  "HE": ["High Explosive","Hydrophone Effect"],
+  "IT": ["Individual Training","Information Technology"],
+  "ldg": ["Landing","Leading"],
+  "med": ["Medical","Medicine","Medium"],
+  "MT": ["Mechanical Transport","Motor Transport"],
+  "MS": ["Mine Sweeper","Mile Stone"],
+  "MOT": ["Mission Oriented Task","Mission Oriented Training"],
+  "PA": ["Public Address","Personal Assistant","Personnel Administration"],
+  "para": ["Paragraph","Parachute","Paratrooper"],
+  "RT": ["Radio Telephone","Religion Teacher"],
+  "RV": ["Receipt Voucher","Rendezvous"],
+  "RW": ["Runway","Rotary Wing","Riverine Warfare","Research Work"],
+  "SF": ["Security Force","Striking Force","Special Force","Safety Fuse"],
+  "SL": ["Start Line","Search Light"],
+  "TOT": ["Time on Target","Time Over Target","Transfer of Technology"],
+  "SP": ["Self-Propelled","Signal Publication","Start Point"],
+  "SOA": ["Speed of Advance","Submarine Operating Area"],
+  "ASR": ["Air Surveillance Radar","Alternative Supply Route"],
+};
+
+// Build lookup maps
+const wordToAbbr = new Map();
+const abbrToWord = new Map();
+
+ABBR_DATA.forEach(([word, abbr, cat]) => {
+  const wl = word.toLowerCase();
+  const al = abbr.toLowerCase();
+  if (!wordToAbbr.has(wl)) wordToAbbr.set(wl, []);
+  wordToAbbr.get(wl).push({ word, abbr, cat });
+  if (!abbrToWord.has(al)) abbrToWord.set(al, []);
+  abbrToWord.get(al).push({ word, abbr, cat });
+});
+
+document.getElementById('dbCount').textContent = `${ABBR_DATA.length} ENTRIES LOADED`;
+
+// ===================== SEARCH =====================
+let searchMode = 'both';
+
+function setMode(m) {
+  searchMode = m;
+  document.getElementById('modeWord').classList.toggle('active', m==='word');
+  document.getElementById('modeAbbr').classList.toggle('active', m==='abbr');
+  document.getElementById('modeBoth').classList.toggle('active', m==='both');
+  doSearch();
+}
+
+function doSearch() {
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  const resultsDiv = document.getElementById('results');
+  const countDiv = document.getElementById('resultsCount');
+
+  if (!q) {
+    resultsDiv.innerHTML = '';
+    countDiv.textContent = '';
+    return;
+  }
+
+  let matches = [];
+
+  if (searchMode === 'word' || searchMode === 'both') {
+    ABBR_DATA.forEach(([word, abbr, cat]) => {
+      if (word.toLowerCase().includes(q)) {
+        matches.push({ word, abbr, cat, matchType: 'word' });
+      }
+    });
+  }
+  if (searchMode === 'abbr' || searchMode === 'both') {
+    ABBR_DATA.forEach(([word, abbr, cat]) => {
+      if (abbr.toLowerCase().includes(q)) {
+        if (!matches.find(m => m.word === word && m.abbr === abbr)) {
+          matches.push({ word, abbr, cat, matchType: 'abbr' });
+        }
+      }
+    });
+  }
+
+  // Sort: exact first
+  matches.sort((a, b) => {
+    const ae = a.abbr.toLowerCase() === q || a.word.toLowerCase() === q;
+    const be = b.abbr.toLowerCase() === q || b.word.toLowerCase() === q;
+    if (ae && !be) return -1;
+    if (!ae && be) return 1;
+    return 0;
+  });
+
+  countDiv.textContent = matches.length > 0 ? `${matches.length} RESULT(S) FOUND` : '';
+
+  if (matches.length === 0) {
+    resultsDiv.innerHTML = '<div class="no-results">NO MATCH FOUND<br><span style="font-size:9px">Try different spelling or switch mode</span></div>';
+    return;
+  }
+
+  resultsDiv.innerHTML = matches.map((m, i) => {
+    const isMulti = MULTI[m.abbr] || MULTI[m.abbr.toUpperCase()];
+    const multiKey = MULTI[m.abbr] ? m.abbr : (MULTI[m.abbr.toUpperCase()] ? m.abbr.toUpperCase() : null);
+    const catLabel = m.cat === 'rank' ? 'RANK' : m.cat === 'measurement' ? 'MEASUREMENT' : m.cat === 'multi' ? 'MULTI-MEANING' : 'GENERAL';
+
+    return `<div class="result-card" id="card-${i}">
+      <div class="result-card-inner" onclick="${isMulti ? `toggleMulti(${i})` : ''}">
+        <div class="result-abbr">${escHtml(m.abbr)}</div>
+        <div class="result-divider"></div>
+        <div class="result-words">
+          <div class="result-word">${escHtml(m.word)}</div>
+          <div class="result-category">${catLabel}</div>
+        </div>
+        ${isMulti ? `<div class="multi-badge">MULTI ▾</div>` : ''}
+      </div>
+      ${isMulti ? `<div class="multi-meanings" id="multi-${i}">
+        ${MULTI[multiKey].map(w => `<div class="multi-meaning-item">▸ ${escHtml(w)}</div>`).join('')}
+      </div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+function toggleMulti(i) {
+  const el = document.getElementById(`multi-${i}`);
+  if (el) el.classList.toggle('show');
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ===================== CONVERTER =====================
+let convMode = 'full2abbr';
+let writingMode = 'operational';
+
+function setConvMode(m) {
+  convMode = m;
+  document.getElementById('convFull2Abbr').classList.toggle('active', m==='full2abbr');
+  document.getElementById('convAbbr2Full').classList.toggle('active', m==='abbr2full');
+}
+
+function setWritingMode(m) {
+  writingMode = m;
+  document.getElementById('wmOps').classList.toggle('active', m==='operational');
+  document.getElementById('wmSvc').classList.toggle('active', m==='service');
+  document.getElementById('wmSig').classList.toggle('active', m==='signal');
+}
+
+function clearConverter() {
+  document.getElementById('convInput').value = '';
+  document.getElementById('convOutput').textContent = '—';
+}
+
+function doConvert() {
+  const input = document.getElementById('convInput').value.trim();
+  if (!input) return;
+
+  let output = '';
+
+  if (convMode === 'full2abbr') {
+    output = convertToAbbreviated(input);
+  } else {
+    output = convertToFull(input);
+  }
+
+  const outEl = document.getElementById('convOutput');
+  outEl.innerHTML = output;
+}
+
+function convertToAbbreviated(text) {
+  // Build sorted word list (longest first to handle multi-word phrases)
+  const entries = [...ABBR_DATA].filter(([w, a, c]) => c !== 'multi');
+  entries.sort((a, b) => b[0].length - a[0].length);
+
+  // If service writing (non-operational), skip non-rank/measurement abbreviations
+  // Signal and operational = full abbreviation
+  const skipGeneral = (writingMode === 'service');
+
+  let result = text;
+
+  entries.forEach(([word, abbr, cat]) => {
+    if (skipGeneral && cat === 'general') return;
+    if (word.length < 3) return; // skip very short words
+    const regex = new RegExp(`\\b${escapeRegex(word)}\\b`, 'gi');
+    result = result.replace(regex, (match) => {
+      return `<span class="converted-abbr" title="${escHtml(word)}">${abbr}</span>`;
+    });
+  });
+
+  return result || text;
+}
+
+function convertToFull(text) {
+  // Replace abbreviations with full words
+  const entries = [...ABBR_DATA].filter(([w, a, c]) => c !== 'multi');
+  // Sort by abbr length descending
+  entries.sort((a, b) => b[1].length - a[1].length);
+
+  let tokens = text.split(/(\s+)/);
+  let result = tokens.map(token => {
+    const clean = token.replace(/[.,;:!?]/g, '');
+    const found = entries.find(([w, a]) => a.toLowerCase() === clean.toLowerCase());
+    if (found) {
+      const punct = token.slice(clean.length);
+      return `<span class="converted-word" title="${escHtml(found[1])}">${found[0]}</span>${punct}`;
+    }
+    return escHtml(token);
+  }).join('');
+
+  return result;
+}
+
+function escapeRegex(s) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function copyOutput() {
+  const el = document.getElementById('convOutput');
+  const text = el.innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = '✓ COPIED';
+    setTimeout(() => btn.textContent = '⎘ Copy Output', 1500);
+  });
+}
+
+// ===================== TABS =====================
+function switchTab(tab) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('section-' + tab).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ===================== RULES =====================
+const RULES = [
+  {
+    title: "Use of Abbreviations — General",
+    body: `<p>Abbreviations from Section 16 of the manual are the standard. Other abbreviations/acronyms may be used if they help understanding, but must be explained the first time they appear — unless they are in Section 16, in general use (e.g. UN, NATO), or are specialist terms well understood by all likely recipients.</p>
+    <p>Once a word is abbreviated anywhere in a document, it must be abbreviated <strong>throughout</strong> that same document consistently.</p>
+    <div class="rule-example">e.g. If "Infantry" is written "inf" once, it must be "inf" every time it appears</div>`
+  },
+  {
+    title: "When to Use / When NOT to Use",
+    body: `<p>Maximum abbreviation is used in:</p>
+    <ul><li>Operational writing</li><li>Signal messages</li><li>BAF service papers on operational matters</li></ul>
+    <p>Abbreviations are <strong>NOT</strong> used (except for decorations, qualifications, arms/services) in:</p>
+    <ul><li>Demi-official letters</li><li>Commanded and formal letters</li><li>Service papers (non-operational)</li></ul>
+    <p>Also, abbreviations from Section 16 are <strong>not used</strong> when writing to allied forces or non-service authorities. Exception: officially recognized abbreviations like WASA, PDB may be used (except in correspondence with foreign organizations).</p>`
+  },
+  {
+    title: "Composite Nouns and Verbs",
+    body: `<p>Any composite noun/verb or one with a prefix/suffix may be abbreviated by abbreviating only the part that has an authorized abbreviation.</p>
+    <div class="rule-example">mob (mobilize) · demob (demobilize) · minefd (minefield)</div>
+    <p>Exception: where there is an authorized abbreviation that includes the prefix/suffix already.</p>
+    <div class="rule-example">C attk (counter attack)</div>`
+  },
+  {
+    title: "Full Stops and Commas in Abbreviations",
+    body: `<p>Full stops are <strong>NOT</strong> used in abbreviations, and NOT used between a person's initials or decorations/qualifications.</p>
+    <p>Commas are used after the name and between abbreviations of branches, decorations, qualifications, and service/regiment/corps.</p>
+    <div class="rule-example">Brig Gen H M Masihur Rahman, SGP, SPP, ndc, afwc, psc<br>Cdr A K M Toriqullah, (L), psc, BN</div>`
+  },
+  {
+    title: "Plurals",
+    body: `<p>Some abbreviations cover both singular and plural — no 's' is added.</p>
+    <div class="rule-example">rat → ration or rations</div>
+    <p>Measurement abbreviations always remain unaltered in the plural.</p>
+    <div class="rule-example">m (metre, metres) · hr (hour, hours) · l (litre, litres)</div>
+    <p>If 's' is needed, it is placed at the very end of the abbreviation.</p>
+    <div class="rule-example">GOCs (General Officers Commanding)</div>
+    <p>An 's' may only be added to the abbreviation of a noun, never a verb.</p>`
+  },
+  {
+    title: "Verbs — All Tenses and Derivatives",
+    body: `<p>If there is an authorized abbreviation for a verb in its present indefinite form, that same abbreviation is used for all tenses and derivatives of that verb.</p>
+    <div class="rule-example">sp → support, supported, supporting, supporter, supportive</div>
+    <p>Exception: specific tenses or derivatives that have their own designated abbreviation are only used for that specific word.</p>
+    <div class="rule-example">bldg (building) · retd (retired) · addl (additional)</div>`
+  },
+  {
+    title: "Multiple Meanings",
+    body: `<p>Some abbreviations have two or more meanings (see the search results tagged MULTI-MEANING). In cases where confusion may arise, write the word out in full.</p>
+    <div class="rule-example">AA → Avenue of Approach OR Anti-Aircraft<br>AB → Airborne OR After Burner</div>
+    <p>Context should normally make the meaning clear, but if there is any doubt, use the full word.</p>`
+  },
+  {
+    title: "Ampersand (&)",
+    body: `<p>An ampersand '&' is used instead of 'and' where appropriate in departmental and similar titles.</p>
+    <div class="rule-example">AA&QMG · R&D · Messrs Rahman & Sons</div>`
+  },
+  {
+    title: "Compass Points",
+    body: `<p>The four cardinal points (north, south, east, west) are <strong>always written in full in small letters</strong>.</p>
+    <p>Intermediate points can be either abbreviated using initial letters, or written in full with a hyphen.</p>
+    <div class="rule-example">NE · NNE · north-east · north-north-east</div>`
+  },
+  {
+    title: "Capitals in Abbreviations",
+    body: `<p>If the first letter of an abbreviated item is in capitals as shown in Section 16, it remains in capitals wherever it appears.</p>
+    <div class="rule-example">C attk · Atk</div>
+    <p>Lower-case abbreviations stay lower-case throughout.</p>`
+  },
+  {
+    title: "Numerals and Ordinals",
+    body: `<p>Fractions and whole numbers (except 'one') are written in figures. When a number begins a sentence or refers to a quantitative number of formations/units/ships, it is spelled out.</p>
+    <div class="rule-example">twelve 10-ton trucks OR 12 × 10-ton trucks</div>
+    <p>Ordinals are usually abbreviated.</p>
+    <div class="rule-example">6th Staff Course · 1st World War</div>
+    <p>Identifying numbers of formations/units use Arabic numerals before the description; quantitative numbers are always written in full words.</p>
+    <div class="rule-example">11 Inf Div (identifying) · Twenty-eight squadrons (quantitative)</div>`
+  },
+  {
+    title: "Dates",
+    body: `<p>Dates are written in the sequence: day, month, year.</p>
+    <div class="rule-example">01 August 2022 (full) · 01 Aug 22 (abbreviated)</div>
+    <p>A night is described by both dates over which it extends.</p>
+    <div class="rule-example">Night 29/30 August · Night 30 August/01 September</div>
+    <p>The term 'midnight' is not used — instead write '0000 hours' with the date.</p>
+    <div class="rule-example">0000 hours 16 August = midnight on the night 15/16 August</div>`
+  },
+  {
+    title: "Time — 24-Hour Clock",
+    body: `<p>Time is expressed in four figures using the 24-hour clock. First pair = hours, second pair = minutes.</p>
+    <p><strong>In operational writing:</strong> four figures are followed by a time zone suffix.</p>
+    <div class="rule-example">2359F · 1415B</div>
+    <p><strong>In service writing:</strong> the time zone suffix or 'hours' is added when confusion with grid references or other figures is possible.</p>
+    <div class="rule-example">1100F or 1100 hours</div>
+    <p>The 12-hour clock with am/pm is used only when dealing with civilians and social invitations — never in service writing.</p>`
+  },
+  {
+    title: "Date-Time Groups (DTG)",
+    body: `<p>DTGs give date and time including time zone. They consist of 6 figures (first 2 = date, last 4 = time) followed by a time zone suffix.</p>
+    <p><strong>In operational writing:</strong> DTG is followed by first three letters of the month.</p>
+    <div class="rule-example">221415 Aug (or 221415 Aug 22 to avoid ambiguity)</div>
+    <p><strong>In signal messages:</strong> DTG must always include a time zone suffix and the first three letters of the month.</p>`
+  },
+  {
+    title: "Measurement Abbreviations",
+    body: `<p>Internationally agreed abbreviations/symbols are used for units of measurement. These remain <strong>unaltered in the plural</strong>.</p>
+    <div class="rule-example">10 lb (not 10 lbs) · 5 m (not 5 ms) · 3 hr (not 3 hrs)</div>
+    <p>Key measurement abbreviations include: in, ft, yd, nm, mm, cm, m, km, kg, kt, mph, hr, l, ml, °C, °F, HP, kW, Hz, dB.</p>`
+  },
+  {
+    title: "National Distinguishing Letters",
+    body: `<p>National distinguishing letters are used to identify a nation or part of its armed forces. They are bracketed immediately following the force/formation/unit number.</p>
+    <div class="rule-example">6th (US) Fleet · 3rd (UK) Division</div>
+    <p>For army elements smaller than a division, national letters are only used when necessary to avoid confusion.</p>
+    <p>Key examples: BD (Bangladesh) · US (United States) · UK (United Kingdom) · IN (India) · PK (Pakistan) · FR (France)</p>`
+  },
+];
+
+function buildRules() {
+  const container = document.getElementById('rulesList');
+  container.innerHTML = RULES.map((r, i) => `
+    <div class="rule-item" id="rule-${i}">
+      <div class="rule-header" onclick="toggleRule(${i})">
+        <span class="rule-num">${String(i+1).padStart(2,'0')}</span>
+        <span class="rule-title">${r.title}</span>
+        <span class="rule-chevron">▼</span>
+      </div>
+      <div class="rule-body">${r.body}</div>
+    </div>
+  `).join('');
+}
+
+function toggleRule(i) {
+  const el = document.getElementById('rule-' + i);
+  el.classList.toggle('open');
+}
+
+buildRules();
+</script>
+
+<!-- PWA Service Worker Registration -->
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
+</script>
+</body>
+</html>
