@@ -1,4 +1,4 @@
-const CACHE = 'bdf-abbr-v1';
+const CACHE = 'jssdm-abbr-v4';
 const ASSETS = [
   './',
   './index.html',
